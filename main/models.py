@@ -10,7 +10,7 @@ class Person(models.Model):
     def get_current_person(cls):
         latest_activity = Activity.get_latest_activity()
         all_people = Person.objects.order_by('pk')
-        last_person_index = 0
+        last_person_index = current_person_index = 0
 
         i = 0
         if latest_activity is not None:
@@ -19,9 +19,9 @@ class Person(models.Model):
                     last_person_index = i
                 i += 1
 
-        current_person_index = last_person_index + 1
-        if current_person_index == len(all_people):
-            current_person_index = 0
+            current_person_index = last_person_index + 1
+            if current_person_index == len(all_people):
+                current_person_index = 0
 
         return all_people[current_person_index]
 
