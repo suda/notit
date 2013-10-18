@@ -1,50 +1,45 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+    <blockquote>
+        <p>Ja przedwczoraj ściszałem telewizor...</p>
+        <small>Laska, <cite title="Chłopaki nie płaczą">Chłopaki nie płaczą</cite></small>
+    </blockquote>
 
-<div class="row">
-	<div class="span4 offset4">
-		<blockquote>
-			<p>Ja przedwczoraj ściszałem telewizor...</p>
-			<small>Laska, <cite title="Chłopaki nie płaczą">Chłopaki nie płaczą</cite></small>
-		</blockquote>
+    <h3 class="text-info">Kto tym razem idzie po żarcie?</h3>
 
-		<h3 class="text-info">Kto tym razem idzie po żarcie?</h3>
-
-        {% if today_was_done %}
-            <div class="well">
-                <h5>Zamówienia na dzisiaj skończone.</h5>
-            </div>
-        {% else %}
-            <ul>
-                {% for person in all_people %}
-                    <li>
-                    {% if person.pk == current_person.pk %}
-                        <h3><i class="icon-arrow-right"></i> {{ person }}</h3>
-                    {% else %}
-                        {{ person }}
-                    {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <div class="well">
-                <form action="/" method="POST" class="form-inline">
-                    {% csrf_token %}
-                    <input type="text" placeholder="Ja, {{ current_person }}, poszedłem po..." name="item">
-                    <button type="submit" class="btn btn-success">Zapisz</button>
-                </form>
-            </div>
-        {% endif %}
-
-        <div class="bs-docs-example">
-            <dl class="dl-horizontal">
-                {% for row in history %}
-                    <dt>{% if row.is_today %}dzisiaj{% else %}{{ row.human_timestamp }}{% endif %}</dt>
-                    <dd><strong>{{ row.person }}</strong> poszedł po {{ row.item }}</dd>
-                {% endfor %}
-            </dl>
+    {% if today_was_done %}
+        <div class="well">
+            <h5>Zamówienia na dzisiaj skończone.</h5>
         </div>
-	</div>
-</div>
+    {% else %}
+        <ul>
+            {% for person in all_people %}
+                <li>
+                {% if person.pk == current_person.pk %}
+                    <h3><i class="icon-arrow-right"></i> {{ person }}</h3>
+                {% else %}
+                    {{ person }}
+                {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="well">
+            <form action="/" method="POST" class="form-inline">
+                {% csrf_token %}
+                <input type="text" placeholder="Ja, {{ current_person }}, poszedłem po..." name="item">
+                <button type="submit" class="btn btn-success">Zapisz</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <div class="bs-docs-example">
+        <dl class="dl-horizontal">
+            {% for row in history %}
+                <dt>{% if row.is_today %}dzisiaj{% else %}{{ row.human_timestamp }}{% endif %}</dt>
+                <dd><strong>{{ row.person }}</strong> poszedł po {{ row.item }}</dd>
+            {% endfor %}
+        </dl>
+    </div>
 {% endblock %}

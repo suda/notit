@@ -4,9 +4,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=300px, user-scalable=false;">
     <title>Ja przedwczoraj ściszałem telewizor...</title>
     {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
+
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -23,11 +24,14 @@
         ul, li { list-style: none; font-size: 24.5px; line-height: 40px; }
         li > h3 { margin: 0; }
         li > h3 > i { margin-top: 9px !important; }
+
+        .container { margin: 0 auto; float: none !important; }
+
         .dl-horizontal dt { width: 60px; }
         .dl-horizontal dd { margin-left: 80px; }
         .well { margin-top: 30px; }
         form { margin: 0; }
-        input { width: 244px; }
+        input { width: 174px; }
 
         /* Bootstrap code examples
         -------------------------------------------------- */
@@ -66,7 +70,7 @@
 
 <body>
 
-<div class="container">
+<div class="container span4">
     {% bootstrap_messages %}
 
     {% block content %}Empty page{% endblock %}
