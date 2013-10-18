@@ -9,7 +9,7 @@
 			<small>Laska</small>
 		</blockquote>
 
-		<h1 class="text-info">Kto tym razem idzie po żarcie?</h1>
+		<h3 class="text-info">Kto tym razem idzie po żarcie?</h3>
 
 		<ul>
 			<li><h3><i class="icon-arrow-right"></i> suda</h3></li>
@@ -17,10 +17,23 @@
 			<li>paweł</li>
 		</ul>
 
+        <div class="well">
+            {% if today_was_done %}
+                <h5>Zamówienia na dzisiaj skończone.</h5>
+            {% else %}
+                <form action="/" method="POST" class="form-inline">
+                    <input type="text" placeholder="Ja, suda, poszedłem po...">
+                    <button type="submit" class="btn btn-success">Zapisz</button>
+                </form>
+            {% endif %}
+        </div>
+
         <div class="bs-docs-example">
             <dl class="dl-horizontal">
-                <dt>dzisiaj</dt>
-                <dd>paweł poszedł po kebab</dd>
+                {% for row in history %}
+                    <dt>{% if row.is_today %}dzisiaj{% else %}{{ row.human_timestamp }}{% endif %}</dt>
+                    <dd>{{ row }}</dd>
+                {% endfor %}
             </dl>
         </div>
 	</div>
