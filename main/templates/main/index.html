@@ -41,7 +41,7 @@
             <dl class="dl-horizontal">
                 {% for row in history %}
                     <dt>{% if row.is_today %}dzisiaj{% else %}{{ row.human_timestamp }}{% endif %}</dt>
-                    <dd>{{ row }}</dd>
+                    <dd><strong>{{ row.person }}</strong> poszedł po {{ row.item }}</dd>
                 {% endfor %}
             </dl>
         </div>
