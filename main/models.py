@@ -6,6 +6,25 @@ from django.db import models
 class Person(models.Model):
     name = models.CharField(max_length=255, verbose_name=u'Imię/nick')
 
+    @classmethod
+    def get_current_person(cls):
+        latest_activity = Activity.get_latest_activity()
+        all_people = Person.objects.order_by('pk')
+        last_person_index = 0
+
+        i = 0
+        if latest_activity is not None:
+            for person in all_people:
+                if person.pk == latest_activity.person.pk:
+                    last_person_index = i
+                i += 1
+
+        current_person_index = last_person_index + 1
+        if current_person_index == len(all_people):
+            current_person_index = 0
+
+        return all_people[current_person_index]
+
     def __unicode__(self):
         return self.name
 
